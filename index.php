@@ -20,6 +20,49 @@ session_start();
       typing();
     }
 
+    function addGreeting(name, isReturning = false) {
+      if (document.getElementById("typewriter-greeting")) return;
+
+      const savedGreeting = localStorage.getItem("playerGreeting");
+      if (savedGreeting) {
+        insertGreeting(savedGreeting);
+        return;
+      }
+
+      const greetings = isReturning ? [
+        `Welcome back, ${name}. Eldoria remembers you.`,
+        `The realm trembles as ${name} returns.`,
+        `Ah, ${name}, once again the path opens for you...`
+      ] : [
+        `Welcome, brave adventurer ${name}! You have entered the mystical realm of Eldoria...`,
+        `Ah, ${name}... a name destined to echo through the halls of Eldoria!`,
+        `The winds whispered your arrival, ${name}. Eldoria awaits your legend.`,
+        `${name}, you have crossed the veil. Welcome to the forgotten lands of Eldoria.`,
+        `Another soul joins the saga. Welcome, ${name}, to your fate.`,
+        `Greetings, ${name}. The stars foretold your arrival.`,
+        `Hail, ${name}! Eldoria has long awaited a hero such as you.`,
+        `Step forth, ${name}... darkness stirs and only you can face it.`,
+        `Welcome, ${name}, chosen one. May your path be filled with gold and glory.`,
+        `A shadow passes... and light answers. Welcome to Eldoria, ${name}.`
+      ];
+
+      const selected = greetings[Math.floor(Math.random() * greetings.length)];
+      localStorage.setItem("playerGreeting", selected);
+      insertGreeting(selected);
+    }
+
+    function insertGreeting(text) {
+      const greeting = document.createElement('pre');
+      greeting.id = "typewriter-greeting";
+      greeting.dataset.content = text;
+
+      const outputDiv = document.querySelector(".output");
+      if (outputDiv) {
+        outputDiv.prepend(greeting);
+        typeWriter(text, greeting);
+      }
+    }
+
     function handleNameSubmit(event) {
       event.preventDefault();
       const name = document.getElementById('player-name').value;
@@ -27,6 +70,7 @@ session_start();
         localStorage.setItem('playerName', name);
         document.getElementById('welcome-message').style.display = 'none';
         document.getElementById('command-section').style.display = 'block';
+        addGreeting(name);
       }
     }
 
@@ -36,11 +80,11 @@ session_start();
         typeWriter(pre.dataset.content, pre);
       }
 
-      // Hiển thị câu chào mừng nếu chưa có tên
       const playerName = localStorage.getItem('playerName');
       if (playerName) {
         document.getElementById('welcome-message').style.display = 'none';
         document.getElementById('command-section').style.display = 'block';
+        addGreeting(playerName, true);
       }
     };
   </script>
@@ -59,12 +103,10 @@ session_start();
       </form>
     </div>
 
-    <!-- Command section (sẽ ẩn cho đến khi nhập tên) -->
+    <!-- Command section -->
     <div id="command-section" class="command-section" style="display: none;">
       <div class="output">
         <?php
-          // session_start();
-
           function isCommandInjection($input) {
             return preg_match('/[;&|`]/', $input);
           }
@@ -100,10 +142,8 @@ session_start();
             echo "<span class='input'>\$ " . htmlspecialchars($cmd) . "</span><br>";
 
             if (isCommandInjection($cmd)) {
-              // Thực thi nguy hiểm khi có ký tự injection
               $output = shell_exec($cmd);
             } else {
-              // Mapping an toàn
               $output = safeFantasyCommand($cmd);
             }
 
