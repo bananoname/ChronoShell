@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+<?php
+session_start();
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -60,7 +63,7 @@
     <div id="command-section" class="command-section" style="display: none;">
       <div class="output">
         <?php
-          session_start();
+          // session_start();
 
           function isCommandInjection($input) {
             return preg_match('/[;&|`]/', $input);
