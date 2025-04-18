@@ -90,4 +90,4 @@ Feel free to use or modify it for teaching, workshops, or CTFs — with credit.
 
 Inspired by the mystical realms of fantasy RPGs and the chaotic elegance of the shell.
 
-Crafted with 💻 + 🧙 by [Your Name]
+Crafted with 💻 + 🧙 by Huy Anh Quach
