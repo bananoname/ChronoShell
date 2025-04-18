@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Eldoria Terminal</title>
+  <title>ChronoShell Terminal</title>
   <link rel="stylesheet" href="style.css">
   <script>
     function typeWriter(text, element, delay = 30) {
@@ -91,7 +91,7 @@ session_start();
 </head>
 <body>
   <div class="terminal">
-    <div class="header">Eldoria Console v1.3</div>
+    <div class="header">ChronoShell Console v2.0</div>
 
     <!-- Chào mừng và nhập tên -->
     <div id="welcome-message" class="welcome-message">
