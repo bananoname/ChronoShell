@@ -1,0 +1,37 @@
+
+body {
+  background-color: #0f0f0f;
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+}
+.terminal {
+  padding: 2rem;
+}
+.header {
+  font-weight: bold;
+  background: #222;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid #00ff88;
+  margin-bottom: 1rem;
+}
+.input-form {
+  margin-top: 1rem;
+}
+.input-form input {
+  background: #111;
+  color: #00ff88;
+  border: none;
+  padding: 0.5rem;
+  width: 70%;
+}
+.input-form label {
+  margin-right: 0.5rem;
+}
+.output pre {
+  white-space: pre-wrap;
+}
+.input {
+  color: #88f;
+}
